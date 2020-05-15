@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ProfileService } from './services/profile/profile.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,7 @@ import { ErrorHandlerService } from './services/error-handling/error-handler.ser
 import { AuthGuardService } from './services/authentication/auth-guard.service';
 import { AuthService } from './services/authentication/auth.service';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
+import { Profile } from './shared/profile';
 
 @NgModule({
   declarations: [
@@ -23,13 +25,15 @@ import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     ProfileService,
     ErrorHandlerService,
     AuthGuardService,
-    AuthService
+    AuthService,
+    Profile
   ],
   bootstrap: [AppComponent]
 })

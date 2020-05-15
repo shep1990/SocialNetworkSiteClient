@@ -1,3 +1,4 @@
-<ul>
-  <li>{{ name }}</li>
-</ul>
+<label>
+  Name:
+  <input type="text" [formControl]="name" [(ngModel)]="stringData.name">
+</label>

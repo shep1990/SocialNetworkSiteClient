@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  authority: 'https://authentication.gts.com/',
+  redirectUrl: 'https://localhost:4200/auth-callback',
+  postLogoutUrl: 'https://localhost:4200/signout-callback-oidc',
+  profileApi: 'https://profileApi.gts.com/'
 };
 
 /*

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserManager, UserManagerSettings, User } from 'oidc-client'
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -39,10 +40,10 @@ export class AuthService {
 
 export function getClientSettings(): UserManagerSettings {
   return {
-    authority: 'https://authentication.gts.com/',
+    authority: environment.authority,
     client_id: 'SocialNetwork',
-    redirect_uri: 'https://localhost:4200/auth-callback',
-    post_logout_redirect_uri: 'https://localhost:4200/signout-callback-oidc',
+    redirect_uri: environment.redirectUrl,
+    post_logout_redirect_uri: environment.postLogoutUrl,
     response_type: "id_token token",
     scope: "openid profile socialNetwork.Profile",
     filterProtocolClaims: true,

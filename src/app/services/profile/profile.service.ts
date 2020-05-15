@@ -1,13 +1,13 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Value } from '../../shared/value'
 import { AuthService } from '../authentication/auth.service';
+import { Profile } from '../../shared/profile';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ProfileService implements OnInit{
-  private accessPointUrl: string = 'https://profileApi.gts.com/api/profile/getprofile/';
-  response: Object;
+  private accessPointUrl: string = environment.profileApi;
 
   constructor(
     private http: HttpClient,
@@ -20,11 +20,10 @@ export class ProfileService implements OnInit{
   }
 
 
-
-  public get(): Observable<Value> {
+  public get(): Observable<Profile> {
     let headers = new HttpHeaders({
       'Authorization': this.authService.getAuthorizationHeaderValue()
     });
-    return this.http.get<Value>(this.accessPointUrl + this.authService.getClaims()['sub'], { headers: headers });
+    return this.http.get<Profile>(this.accessPointUrl + 'api/profile/getprofile/' + this.authService.getClaims()['sub'], { headers: headers });
   }
 }

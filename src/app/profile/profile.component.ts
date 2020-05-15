@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../services/profile/profile.service';
 import { ErrorHandlerService } from '../services/error-handling/error-handler.service';
 import { AuthService } from '../services/authentication/auth.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +10,7 @@ import { AuthService } from '../services/authentication/auth.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  stringData: object;
+  stringData: {};
   public errorMessage: string = '';
 
   constructor(
@@ -19,6 +20,9 @@ export class ProfileComponent implements OnInit {
   {
 
   }
+
+  name = new FormControl('');
+  email = new FormControl('')
 
   ngOnInit() {
     this.getProfile();
