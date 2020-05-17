@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../services/profile/profile.service';
 import { ErrorHandlerService } from '../services/error-handling/error-handler.service';
 import { AuthService } from '../services/authentication/auth.service';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -10,35 +10,42 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  registerForm: FormGroup;
   stringData: {};
   public errorMessage: string = '';
 
-
-  name = new FormControl('', Validators.required);
-  email = new FormControl('', [Validators.required, Validators.email]);
-  age = new FormControl('', Validators.required);
-  dateOfBirth = new FormControl('', Validators.required);
-
-
-
   constructor(
     private profileService: ProfileService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private formBuilder: FormBuilder
   )
   {
   }
 
   ngOnInit() {
     this.getProfile();
+    this.registerForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      age: ['', Validators.required],
+      dateOfBirth: ['', Validators.required]
+    })
+  }
+
+  get getFormControl() {
+    return this.registerForm.controls;
   }
 
   getProfile() {
     this.profileService.get().subscribe((data: {}) => {
       this.stringData = data;
-      this.name.setValue(this.stringData['name']);
-      this.email.setValue(this.stringData['email']);
-      this.age.setValue(this.stringData['age']);
-      this.dateOfBirth.setValue(this.stringData['dateOfBirth']);
+
+      this.registerForm.setValue({
+        name: this.stringData['name'],
+        email: this.stringData['email'],
+        age: this.stringData['age'],
+        dateOfBirth: this.stringData['dateOfBirth']
+      });
     },
     (error) => {
       this.errorHandler.handleError(error);

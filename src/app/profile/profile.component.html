@@ -1,16 +1,30 @@
-<label>
-  Name:
-  <input type="text" [formControl]="name">
-</label>
-<label>
-  Email:
-  <input type="text" [formControl]="email">
-</label>
-<label>
-  Age:
-  <input type="text" [formControl]="age">
-</label>
-<label>
-  Date Of Birth:
-  <input type="text" [formControl]="dateOfBirth">
-</label>
+<form [formGroup]="registerForm">
+  <div class="form-group">
+    <label>First Name</label>
+    <input type="text" formControlName="name" class="form-control" required />
+    <span class="text-danger" *ngIf="(getFormControl.name.touched) && getFormControl.name.errors?.required">
+      Name is required
+    </span>
+  </div>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="text" formControlName="email" class="form-control" />
+    <span class="text-danger" *ngIf="(getFormControl.email.touched) && getFormControl.email.errors?.required">
+      Email is required
+    </span>
+  </div>
+  <div class="form-group">
+    <label>Age</label>
+    <input type="text" formControlName="age" class="form-control" />
+    <span class="text-danger" *ngIf="(getFormControl.age.touched) && getFormControl.age.errors?.required">
+      Age is required
+    </span>
+  </div>
+  <div class="form-group">
+    <label>Date Of Birth</label>
+    <input type="text" formControlName="dateOfBirth" class="form-control" />
+    <span class="text-danger" *ngIf="(getFormControl.dateOfBirth.touched) && getFormControl.dateOfBirth.errors?.required">
+      D.O.B is required
+    </span>
+  </div>
+</form>
