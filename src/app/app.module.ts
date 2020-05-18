@@ -1,19 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ProfileService } from './services/profile/profile.service';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+import { AuthService } from './services/authentication/auth.service';
+import { AuthGuardService } from './services/authentication/auth-guard.service';
+import { ErrorHandlerService } from './services/error-handling/error-handler.service';
+import { ProfileService } from './services/profile/profile.service';
+import { Profile } from './shared/profile';
+
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
-import { HttpClientModule } from '@angular/common/http';
 import { InternalServerComponent } from './error-pages/internal-server/internal-server.component';
-import { Router, RouterModule } from '@angular/router';
-import { ErrorHandlerService } from './services/error-handling/error-handler.service';
-import { AuthGuardService } from './services/authentication/auth-guard.service';
-import { AuthService } from './services/authentication/auth.service';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
-import { Profile } from './shared/profile';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +32,11 @@ import { Profile } from './shared/profile';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     ProfileService,

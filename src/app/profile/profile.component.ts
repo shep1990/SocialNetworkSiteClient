@@ -3,6 +3,7 @@ import { ProfileService } from '../services/profile/profile.service';
 import { ErrorHandlerService } from '../services/error-handling/error-handler.service';
 import { AuthService } from '../services/authentication/auth.service';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-profile',
