@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { AuthService } from '../authentication/auth.service';
 import { Profile } from '../../shared/profile';
 import { environment } from '../../../environments/environment';
@@ -25,5 +25,20 @@ export class ProfileService implements OnInit{
       'Authorization': this.authService.getAuthorizationHeaderValue()
     });
     return this.http.get<Profile>(this.accessPointUrl + 'api/profile/getprofile/' + this.authService.getClaims()['sub'], { headers: headers });
+  }
+
+  public put(profile: Profile): Observable<Profile> {
+
+    let SignUpModel = {
+      "name": profile.name,
+      "email": profile.email,
+      "age": profile.age,
+      "dateOfBirth": profile.dateOfBirth
+    }
+
+    let headers = new HttpHeaders({
+      'Authorization': this.authService.getAuthorizationHeaderValue()
+    });
+    return this.http.post<Profile>(this.accessPointUrl + 'api/profile/UpdateProfile/' + this.authService.getClaims()['sub'], SignUpModel, { headers: headers });
   }
 }

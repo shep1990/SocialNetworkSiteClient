@@ -4,9 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class Profile {
-  id: string;
   name: string;
   email: string;
   age: number;
-  dateOfBirth: string;
+  dateOfBirth: Date;
 }

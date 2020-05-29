@@ -17,7 +17,6 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private profileService: ProfileService,
-    private errorHandler: ErrorHandlerService,
     private formBuilder: FormBuilder
   )
   {
@@ -47,10 +46,10 @@ export class ProfileComponent implements OnInit {
         age: this.stringData['age'],
         dateOfBirth: this.stringData['dateOfBirth']
       });
-    },
-    (error) => {
-      this.errorHandler.handleError(error);
-      this.errorMessage = this.errorHandler.errorMessage;
-    });
+    })
+  }
+
+  onSubmit() {
+    this.profileService.put(this.registerForm.value).subscribe();
   }
 }
