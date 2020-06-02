@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../services/profile/profile.service';
-import { ErrorHandlerService } from '../services/error-handling/error-handler.service';
-import { AuthService } from '../services/authentication/auth.service';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
+import { ProfileService } from '../../services/profile/profile.service';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +10,6 @@ import { MatCardModule } from '@angular/material/card';
 export class ProfileComponent implements OnInit {
   registerForm: FormGroup;
   stringData: {};
-  public errorMessage: string = '';
 
   constructor(
     private profileService: ProfileService,
@@ -23,13 +19,13 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getProfile();
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       age: ['', Validators.required],
       dateOfBirth: ['', Validators.required]
     })
+    this.getProfile();
   }
 
   get getFormControl() {

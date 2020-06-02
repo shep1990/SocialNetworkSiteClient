@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
-import { Router, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,9 +15,11 @@ import { ProfileService } from './services/profile/profile.service';
 import { Profile } from './shared/profile';
 
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './profile/profile.component';
-import { InternalServerComponent } from './error-pages/internal-server/internal-server.component';
-import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { InternalServerComponent } from './components/error-pages/internal-server/internal-server.component';
+import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
+import { StatusComponent } from './components/status/status.component';
+import { StatusService } from './services/status/status.service';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
     AppComponent,
     ProfileComponent,
     InternalServerComponent,
-    AuthCallbackComponent
+    AuthCallbackComponent,
+    StatusComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
   ],
   providers: [
     ProfileService,
+    StatusService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerService,

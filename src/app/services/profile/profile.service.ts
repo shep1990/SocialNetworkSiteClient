@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { AuthService } from '../authentication/auth.service';
 import { Profile } from '../../shared/profile';
 import { environment } from '../../../environments/environment';

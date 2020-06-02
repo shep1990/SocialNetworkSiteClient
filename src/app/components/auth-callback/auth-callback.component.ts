@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/authentication/auth.service';
+import { AuthService } from '../../services/authentication/auth.service';
 
 @Component({
   selector: 'app-auth-callback',

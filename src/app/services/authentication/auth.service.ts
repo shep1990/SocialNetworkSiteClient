@@ -45,7 +45,7 @@ export function getClientSettings(): UserManagerSettings {
     redirect_uri: environment.redirectUrl,
     post_logout_redirect_uri: environment.postLogoutUrl,
     response_type: "id_token token",
-    scope: "openid profile socialNetwork.Profile",
+    scope: "openid profile socialNetwork.Profile socialNetwork.Status",
     filterProtocolClaims: true,
     loadUserInfo: true
   };

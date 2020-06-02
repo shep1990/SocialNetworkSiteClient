@@ -7,7 +7,8 @@ export const environment = {
   authority: 'https://authentication.gts.com/',
   redirectUrl: 'https://localhost:4200/auth-callback',
   postLogoutUrl: 'https://localhost:4200/signout-callback-oidc',
-  profileApi: 'https://profileApi.gts.com/'
+  profileApi: 'https://profileApi.gts.com/',
+  statusApi: 'https://statusApi.gts.com/'
 };
 
 /*
