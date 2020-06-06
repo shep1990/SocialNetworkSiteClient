@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ToastModule } from 'primeng/toast';
 
 import { AuthService } from './services/authentication/auth.service';
 import { AuthGuardService } from './services/authentication/auth-guard.service';
@@ -20,7 +21,6 @@ import { InternalServerComponent } from './components/error-pages/internal-serve
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { StatusComponent } from './components/status/status.component';
 import { StatusService } from './services/status/status.service';
-
 
 @NgModule({
   declarations: [
@@ -38,9 +38,12 @@ import { StatusService } from './services/status/status.service';
     BrowserAnimationsModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    ToastModule
   ],
   providers: [
+    AuthGuardService,
+    AuthService,
     ProfileService,
     StatusService,
     {
@@ -49,8 +52,6 @@ import { StatusService } from './services/status/status.service';
       multi: true
     },
     ErrorHandlerService,
-    AuthGuardService,
-    AuthService,
     Profile
   ],
   bootstrap: [AppComponent]

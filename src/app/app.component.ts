@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
+
 import * as signalR from '@aspnet/signalr';
 import { environment } from '../environments/environment';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  providers: [MessageService]
 })
 export class AppComponent implements OnInit {
 
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
   ngOnInit(): void {
     const connection = new signalR.HubConnectionBuilder()
@@ -24,7 +27,7 @@ export class AppComponent implements OnInit {
     });
 
     connection.on("BroadcastMessage", (name: string, message: string) => {
-      console.log(name, message);
+      this.messageService.add({ severity:'success', summary: message, detail: 'Via SignalR' });
     });
   }
 }

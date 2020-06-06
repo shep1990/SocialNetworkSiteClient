@@ -5,8 +5,14 @@ import { InternalServerComponent } from './components/error-pages/internal-serve
 import { AuthGuardService } from './services/authentication/auth-guard.service';
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { StatusComponent } from './components/status/status.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: AppComponent,
+    canActivate: [AuthGuardService]
+  },
   {
     path: 'profile',
     component: ProfileComponent,
