@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../services/profile/profile.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Profile } from '../../shared/profile';
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +10,6 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
   registerForm: FormGroup;
-  stringData: {};
 
   constructor(
     private profileService: ProfileService,
@@ -33,14 +33,12 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfile() {
-    this.profileService.get().subscribe((data: {}) => {
-      this.stringData = data;
-
+    this.profileService.get().subscribe((data: Profile) => {
       this.registerForm.setValue({
-        name: this.stringData['name'],
-        email: this.stringData['email'],
-        age: this.stringData['age'],
-        dateOfBirth: this.stringData['dateOfBirth']
+        name: data['name'],
+        email: data['email'],
+        age: data['age'],
+        dateOfBirth: data['dateOfBirth']
       });
     })
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 
 import * as signalR from '@aspnet/signalr';
@@ -12,17 +12,21 @@ import { MessageService } from 'primeng/components/common/messageservice';
   providers: [MessageService]
 })
 export class AppComponent implements OnInit {
+  constructor(
+    private messageService: MessageService,
+  )
+  {
+  }
 
-  constructor(private messageService: MessageService) { }
-
-  ngOnInit(): void {
+  ngOnInit() {
     const connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
       .withUrl(environment.notificationApi)
       .build();
 
     connection.start().then(function () {
-    }).catch(function (err) {
+    }).catch(function (err)
+    {
       return console.error(err.toString());
     });
 
