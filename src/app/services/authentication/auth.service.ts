@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
   private manager = new UserManager(getClientSettings());
-  private user: User = null;
+  private user: User;
 
   constructor() {
     this.manager.getUser().then(user => {

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { StatusService } from '../../services/status/status.service';
+import { Profile } from '../../shared/profile';
+import { SharedService } from '../../shared/services/shared.service';
+import { ProfileService } from '../../services/profile/profile.service';
 
 @Component({
   selector: 'app-status',
@@ -12,12 +15,23 @@ export class StatusComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private statusService: StatusService
-  ) { }
+    private statusService: StatusService,
+    private sharedService: SharedService
+  )
+  {
+
+  }
 
   ngOnInit() {
-    this.statusForm = this.formBuilder.group({
-      status: [''],
+    this.sharedService.sharedMessage.subscribe((profile: Profile) => {
+      this.statusForm = this.formBuilder.group({
+        name: profile['name'],
+        status: ['']
+      })
+    })
+
+    this.statusService.get().subscribe((data: any) => {
+        console.log(data)
     })
   }
 

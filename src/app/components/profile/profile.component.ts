@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../services/profile/profile.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Profile } from '../../shared/profile';
+import { SharedService } from '../../shared/services/shared.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private profileService: ProfileService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private sharedService: SharedService
   )
   {
   }
@@ -33,7 +35,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfile() {
-    this.profileService.get().subscribe((data: Profile) => {
+    this.sharedService.sharedMessage.subscribe((data: Profile) => {
       this.registerForm.setValue({
         name: data['name'],
         email: data['email'],

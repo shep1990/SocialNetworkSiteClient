@@ -21,10 +21,7 @@ export class ProfileService implements OnInit{
 
 
   public get(): Observable<Profile> {
-    let headers = new HttpHeaders({
-      'Authorization': this.authService.getAuthorizationHeaderValue()
-    });
-    return this.http.get<Profile>(this.accessPointUrl + 'api/profile/getprofile/' + this.authService.getClaims()['sub'], { headers: headers });
+    return this.http.get<Profile>(this.accessPointUrl + 'api/profile/getprofile/' + this.authService.getClaims()['sub']);
   }
 
   public put(profile: Profile): Observable<Profile> {
@@ -36,9 +33,6 @@ export class ProfileService implements OnInit{
       "dateOfBirth": profile.dateOfBirth
     }
 
-    let headers = new HttpHeaders({
-      'Authorization': this.authService.getAuthorizationHeaderValue()
-    });
-    return this.http.post<Profile>(this.accessPointUrl + 'api/profile/UpdateProfile/' + this.authService.getClaims()['sub'], SignUpModel, { headers: headers });
+    return this.http.post<Profile>(this.accessPointUrl + 'api/profile/UpdateProfile/' + this.authService.getClaims()['sub'], SignUpModel);
   }
 }

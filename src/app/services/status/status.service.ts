@@ -22,11 +22,13 @@ export class StatusService implements OnInit{
   public post(status: Status): Observable<Status> {
     let statusModel = {
       "status": status.status,
+      "name": status.name
     }
 
-    let headers = new HttpHeaders({
-      'Authorization': this.authService.getAuthorizationHeaderValue()
-    });
-    return this.http.post<Status>(this.accessPointUrl + 'api/status/createStatus/' + this.authService.getClaims()['sub'], statusModel, { headers: headers });
+    return this.http.post<Status>(this.accessPointUrl + 'api/status/createStatus/' + this.authService.getClaims()['sub'], statusModel);
+  }
+
+  public get(): Observable<Status[]> {
+    return this.http.get<Status[]>(this.accessPointUrl + 'api/status/GetStatusList/' + this.authService.getClaims()['sub']);
   }
 }

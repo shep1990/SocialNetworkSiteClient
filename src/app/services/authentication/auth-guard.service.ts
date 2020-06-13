@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { AuthService } from './auth.service';
 
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthGuardService implements CanActivate {
 
   constructor(private authService: AuthService) { }
@@ -12,7 +13,6 @@ export class AuthGuardService implements CanActivate {
     if (this.authService.isLoggedIn()) {
       return true;
     }
-
     this.authService.startAuthentication();
     return false;
   }

@@ -9,19 +9,11 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: AppComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'status',
-    component: StatusComponent,
-    canActivate: [AuthGuardService]
+    path: '', canActivate: [AuthGuardService], children: [
+      { path: '', component: AppComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'status', component: StatusComponent },
+    ]
   },
   {
     path: 'error',

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +13,7 @@ import { AuthService } from './services/authentication/auth.service';
 import { AuthGuardService } from './services/authentication/auth-guard.service';
 import { ErrorHandlerService } from './services/error-handling/error-handler.service';
 import { ProfileService } from './services/profile/profile.service';
+import { StatusService } from './services/status/status.service';
 import { Profile } from './shared/profile';
 
 import { AppComponent } from './app.component';
@@ -20,7 +21,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { InternalServerComponent } from './components/error-pages/internal-server/internal-server.component';
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { StatusComponent } from './components/status/status.component';
-import { StatusService } from './services/status/status.service';
+import { JwtInterceptor } from './services/authentication/auth-handler';
 
 @NgModule({
   declarations: [
@@ -39,16 +40,20 @@ import { StatusService } from './services/status/status.service';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    ToastModule
+    ToastModule,
+    FormsModule
   ],
   providers: [
-    AuthGuardService,
-    AuthService,
     ProfileService,
     StatusService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
       multi: true
     },
     ErrorHandlerService,
