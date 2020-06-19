@@ -20,6 +20,9 @@ export class AuthCallbackComponent implements OnInit {
 
   ngOnInit() {
     this.authService.completeAuthentication();
-    this.router.navigate([''])
+
+    setTimeout(() => {
+      this.router.navigate(['']);
+    }, 1000);
   }
 }
