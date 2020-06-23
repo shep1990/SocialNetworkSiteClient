@@ -4,6 +4,7 @@ import { StatusService } from '../../services/status/status.service';
 import { Profile } from '../../shared/profile';
 import { SharedService } from '../../shared/services/shared.service';
 import { ProfileService } from '../../services/profile/profile.service';
+import { Status } from '../../shared/status';
 
 @Component({
   selector: 'app-status',
@@ -12,6 +13,7 @@ import { ProfileService } from '../../services/profile/profile.service';
 })
 export class StatusComponent implements OnInit {
   statusForm: FormGroup;
+  statusList: Status[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,13 +32,17 @@ export class StatusComponent implements OnInit {
       })
     })
 
-    this.statusService.get().subscribe((data: any) => {
-        console.log(data)
+    this.getStatusList();
+  }
+
+  getStatusList() {
+    this.statusService.get().subscribe((data: Status[]) => {
+      this.statusList = data;
     })
   }
 
   onSubmit() {
     this.statusService.post(this.statusForm.value).subscribe();
+    this.getStatusList();
   }
-
 }

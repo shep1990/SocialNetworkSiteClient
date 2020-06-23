@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class Status {
+  userId: string;
   status: string;
   name: string;
 }

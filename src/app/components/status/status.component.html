@@ -12,3 +12,8 @@
     </div>
   </form>
 </mat-card>
+
+<div *ngFor="let status of statusList">
+  <h2>{{ status.name }}</h2>
+  <p>{{ status.status }}</p>
+</div>
