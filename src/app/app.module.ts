@@ -14,6 +14,7 @@ import { AuthGuardService } from './services/authentication/auth-guard.service';
 import { ErrorHandlerService } from './services/error-handling/error-handler.service';
 import { ProfileService } from './services/profile/profile.service';
 import { StatusService } from './services/status/status.service';
+import { FriendManagementService } from './services/friend/friend-management.service';
 import { Profile } from './shared/profile';
 
 import { AppComponent } from './app.component';
@@ -29,7 +30,7 @@ import { JwtInterceptor } from './services/authentication/auth-handler';
     ProfileComponent,
     InternalServerComponent,
     AuthCallbackComponent,
-    StatusComponent
+    StatusComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +47,7 @@ import { JwtInterceptor } from './services/authentication/auth-handler';
   providers: [
     ProfileService,
     StatusService,
+    FriendManagementService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerService,

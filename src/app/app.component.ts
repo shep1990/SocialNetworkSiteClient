@@ -37,9 +37,5 @@ export class AppComponent implements OnInit {
     connection.on("BroadcastMessage", (name: string, message: string) => {
       this.messageService.add({ severity:'success', summary: message, detail: 'Via SignalR' });
     });
-
-    this.profileService.get().subscribe((data: Profile) => {
-      this.sharedService.nextMessage(data);
-    })
   }
 }

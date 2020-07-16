@@ -9,7 +9,8 @@ export const environment = {
   postLogoutUrl: 'https://localhost:4200/signout-callback-oidc',
   profileApi: 'https://profileApi.gts.com/',
   statusApi: 'https://statusApi.gts.com/',
-  notificationApi: 'https://notificationApi.gts.com/notify'
+  notificationApi: 'https://notificationApi.gts.com/notify',
+  friendsApi: 'https://friendsApi.gts.com/'
 };
 
 /*

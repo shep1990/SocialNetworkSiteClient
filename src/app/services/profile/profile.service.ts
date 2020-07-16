@@ -24,6 +24,11 @@ export class ProfileService implements OnInit{
     return this.http.get<Profile>(this.accessPointUrl + 'api/profile/getprofile/' + this.authService.getClaims()['sub']);
   }
 
+  public getUserProfile(userId: string): Observable<Profile> {
+    return this.http.get<Profile>(this.accessPointUrl + 'api/profile/getprofile/' + userId);
+  }
+
+
   public put(profile: Profile): Observable<Profile> {
 
     let SignUpModel = {

@@ -14,6 +14,6 @@
 </mat-card>
 
 <div *ngFor="let status of statusList">
-  <h2>{{ status.name }}</h2>
+  <h2><a [routerLink]="" (click)="getUserProfile(status.userId)">{{ status.name }}</a></h2>
   <p>{{ status.status }}</p>
 </div>

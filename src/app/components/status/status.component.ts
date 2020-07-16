@@ -5,6 +5,9 @@ import { Profile } from '../../shared/profile';
 import { SharedService } from '../../shared/services/shared.service';
 import { ProfileService } from '../../services/profile/profile.service';
 import { Status } from '../../shared/status';
+import { User } from 'oidc-client';
+import { ProfileComponent } from '../profile/profile.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-status',
@@ -18,7 +21,9 @@ export class StatusComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private statusService: StatusService,
-    private sharedService: SharedService
+    private profileService: ProfileService,
+    private sharedService: SharedService,
+    private router: Router
   )
   {
 
@@ -39,6 +44,14 @@ export class StatusComponent implements OnInit {
     this.statusService.get().subscribe((data: Status[]) => {
       this.statusList = data;
     })
+  }
+
+  getUserProfile(userId: string) {
+      this.profileService.getUserProfile(userId).subscribe((data: Profile) => {
+        this.sharedService.nextMessage(data);
+      })
+
+      this.router.navigate(['profile'])
   }
 
   onSubmit() {

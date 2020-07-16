@@ -3,6 +3,7 @@ import { ProfileService } from '../../services/profile/profile.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Profile } from '../../shared/profile';
 import { SharedService } from '../../shared/services/shared.service';
+import { FriendManagementService } from '../../services/friend/friend-management.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,11 +12,12 @@ import { SharedService } from '../../shared/services/shared.service';
 })
 export class ProfileComponent implements OnInit {
   registerForm: FormGroup;
+  profileUserId;
 
   constructor(
     private profileService: ProfileService,
-    private formBuilder: FormBuilder,
-    private sharedService: SharedService
+    private friendService: FriendManagementService,
+    private formBuilder: FormBuilder
   )
   {
   }
@@ -35,14 +37,20 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfile() {
-    this.sharedService.sharedMessage.subscribe((data: Profile) => {
+    this.profileService.get().subscribe((data: Profile) => {
       this.registerForm.setValue({
         name: data['name'],
         email: data['email'],
         age: data['age'],
         dateOfBirth: data['dateOfBirth']
       });
+
+      this.profileUserId = data.id;
     })
+  }
+
+  addFriend(userId: string) {
+    this.friendService.addFriendRequest(userId).subscribe();
   }
 
   onSubmit() {
