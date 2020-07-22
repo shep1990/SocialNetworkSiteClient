@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ErrorHandlerService } from '../../../services/error-handling/error-handler.service';
 
 @Component({
   selector: 'app-internal-server',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./internal-server.component.css']
 })
 export class InternalServerComponent implements OnInit {
-  public errorMessage: string = "Oops, it seems there was an issue with the request, please try again";
+  errorMsg: string;
 
-  constructor() { }
+  constructor(private errorHandlerService: ErrorHandlerService) { }
 
   ngOnInit() {
+    this.errorMsg = this.errorHandlerService.errorMsg;
+    console.log(this.errorMsg)
   }
 }

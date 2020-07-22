@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ToastModule } from 'primeng/toast';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AuthService } from './services/authentication/auth.service';
 import { AuthGuardService } from './services/authentication/auth-guard.service';
@@ -15,6 +16,7 @@ import { ErrorHandlerService } from './services/error-handling/error-handler.ser
 import { ProfileService } from './services/profile/profile.service';
 import { StatusService } from './services/status/status.service';
 import { FriendManagementService } from './services/friend/friend-management.service';
+import { LoaderService } from './services/loader/loader.service';
 import { Profile } from './shared/profile';
 
 import { AppComponent } from './app.component';
@@ -23,6 +25,12 @@ import { InternalServerComponent } from './components/error-pages/internal-serve
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { StatusComponent } from './components/status/status.component';
 import { JwtInterceptor } from './services/authentication/auth-handler';
+import { LoaderComponent } from './components/loader/loader.component';
+
+import { LoaderInterceptor } from './interceptors/loader/loader.interceptor';
+import { NotificationComponent } from './components/notification/notification/notification.component';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { ErrorHandlerInterceptor } from './interceptors/error-handler/error-handler.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,6 +39,8 @@ import { JwtInterceptor } from './services/authentication/auth-handler';
     InternalServerComponent,
     AuthCallbackComponent,
     StatusComponent,
+    LoaderComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -42,24 +52,32 @@ import { JwtInterceptor } from './services/authentication/auth-handler';
     MatFormFieldModule,
     MatInputModule,
     ToastModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     ProfileService,
     StatusService,
-    FriendManagementService,
+    FriendManagementService, ,
+    LoaderService,
+    ErrorHandlerService,
+    Profile,
+    MessageService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ErrorHandlerService,
+      useClass: LoaderInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerInterceptor,
       multi: true
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
-    },
-    ErrorHandlerService,
-    Profile
+    }
   ],
   bootstrap: [AppComponent]
 })
