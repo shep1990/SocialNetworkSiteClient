@@ -12,9 +12,7 @@ export class AuthCallbackComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private profileService: ProfileService,
     private router: Router,
-    private route: ActivatedRoute
   )
   { }
 

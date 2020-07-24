@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../services/profile/profile.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Profile } from '../../shared/profile';
-import { SharedService } from '../../shared/services/shared.service';
 import { FriendManagementService } from '../../services/friend/friend-management.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -12,12 +12,13 @@ import { FriendManagementService } from '../../services/friend/friend-management
 })
 export class ProfileComponent implements OnInit {
   registerForm: FormGroup;
-  profileUserId;
+  profileUserId: string;
 
   constructor(
     private profileService: ProfileService,
     private friendService: FriendManagementService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private datePipe: DatePipe
   )
   {
   }
@@ -38,11 +39,12 @@ export class ProfileComponent implements OnInit {
 
   getProfile() {
     this.profileService.get().subscribe((data: Profile) => {
+
       this.registerForm.setValue({
         name: data['name'],
         email: data['email'],
         age: data['age'],
-        dateOfBirth: data['dateOfBirth']
+        dateOfBirth: this.datePipe.transform(data['dateOfBirth'], "dd/MM/yyyy")
       });
 
       this.profileUserId = data.id;

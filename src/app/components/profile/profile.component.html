@@ -1,54 +1,52 @@
 <app-loader></app-loader>
 
 <button (click)="addFriend(profileUserId)">Click me!</button>
-<mat-card>
 
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" required />
-        <span class="text-danger" *ngIf="(getFormControl.name.touched) && getFormControl.name.errors?.required">
-          Name is required
-        </span>
-      </mat-form-field>
-    </div>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" required />
+      <span class="text-danger" *ngIf="(getFormControl.name.touched) && getFormControl.name.errors?.required">
+        Name is required
+      </span>
+    </mat-form-field>
+  </div>
 
-    <div class="form-group">
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" required />
-        <span class="text-danger" *ngIf="(getFormControl.email.touched) && getFormControl.email.errors?.required">
-          Email is required
-        </span>
-        <span class="text-danger" *ngIf="(getFormControl.email.touched) && getFormControl.email.errors?.email">
-          Please enter a valid email
-        </span>
-      </mat-form-field>
-    </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" required />
+      <span class="text-danger" *ngIf="(getFormControl.email.touched) && getFormControl.email.errors?.required">
+        Email is required
+      </span>
+      <span class="text-danger" *ngIf="(getFormControl.email.touched) && getFormControl.email.errors?.email">
+        Please enter a valid email
+      </span>
+    </mat-form-field>
+  </div>
 
-    <div class="form-group">
-      <mat-form-field>
-        <mat-label>Age</mat-label>
-        <input matInput formControlName="age" required />
-        <span class="text-danger" *ngIf="(getFormControl.age.touched) && getFormControl.age.errors?.required">
-          Age is required
-        </span>
-      </mat-form-field>
-    </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Age</mat-label>
+      <input matInput formControlName="age" required />
+      <span class="text-danger" *ngIf="(getFormControl.age.touched) && getFormControl.age.errors?.required">
+        Age is required
+      </span>
+    </mat-form-field>
+  </div>
 
-    <div class="form-group">
-      <mat-form-field>
-        <mat-label>Date of Birth</mat-label>
-        <input matInput formControlName="dateOfBirth" required />
-        <span class="text-danger" *ngIf="(getFormControl.dateOfBirth.touched) && getFormControl.dateOfBirth.errors?.required">
-          D.O.B is required
-        </span>
-      </mat-form-field>
-    </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Date of Birth</mat-label>
+      <input matInput formControlName="dateOfBirth" required />
+      <span class="text-danger" *ngIf="(getFormControl.dateOfBirth.touched) && getFormControl.dateOfBirth.errors?.required">
+        D.O.B is required
+      </span>
+    </mat-form-field>
+  </div>
 
-    <div class="form-group">
-      <button class="btn btn-primary">Register</button>
-    </div>
-  </form>
-</mat-card>
+  <div class="form-group">
+    <button class="btn btn-primary">Register</button>
+  </div>
+</form>

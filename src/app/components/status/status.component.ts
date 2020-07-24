@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StatusService } from '../../services/status/status.service';
 import { Profile } from '../../shared/profile';
 import { SharedService } from '../../shared/services/shared.service';
@@ -8,6 +8,7 @@ import { Status } from '../../shared/status';
 import { User } from 'oidc-client';
 import { ProfileComponent } from '../profile/profile.component';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/authentication/auth.service';
 
 @Component({
   selector: 'app-status',
@@ -22,6 +23,7 @@ export class StatusComponent implements OnInit {
     private formBuilder: FormBuilder,
     private statusService: StatusService,
     private profileService: ProfileService,
+    private authService: AuthService,
     private sharedService: SharedService,
     private router: Router
   )
@@ -30,8 +32,9 @@ export class StatusComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sharedService.sharedMessage.subscribe((profile: Profile) => {
+    this.profileService.getUserProfile(this.authService.getClaims()['sub']).subscribe((profile: Profile) => {
       this.statusForm = this.formBuilder.group({
+        userId: profile['id'],
         name: profile['name'],
         status: ['']
       })

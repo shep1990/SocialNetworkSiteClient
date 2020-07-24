@@ -23,10 +23,8 @@ export class FriendManagementService implements OnInit{
 
   public addFriendRequest(userId: string): Observable<Friend>{
 
-    var tester: string = this.authService.getClaims()['sub'];
-
     var friendModel = {
-      "RequestUserId": tester,
+      "RequestUserId": this.authService.getClaims()['sub'],
       "TargetUserId": userId
     }
 

@@ -21,8 +21,9 @@ export class StatusService implements OnInit{
 
   public post(status: Status): Observable<Status> {
     let statusModel = {
-      "status": status.status,
-      "name": status.name
+      "userId": status.userId,
+      "name": status.name,
+      "status": status.status
     }
 
     return this.http.post<Status>(this.accessPointUrl + 'api/status/createStatus/' + this.authService.getClaims()['sub'], statusModel);

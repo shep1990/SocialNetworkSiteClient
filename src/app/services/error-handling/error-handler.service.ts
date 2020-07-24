@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 

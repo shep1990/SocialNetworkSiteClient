@@ -13,6 +13,5 @@ export class InternalServerComponent implements OnInit {
 
   ngOnInit() {
     this.errorMsg = this.errorHandlerService.errorMsg;
-    console.log(this.errorMsg)
   }
 }
